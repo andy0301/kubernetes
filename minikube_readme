@@ -1,0 +1,95 @@
+curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl"
+$ chmod +x kubectl
+$ mv kubectl /usr/local/bin/
+LM-SFA-11015582:kubernetes lecai$ kubectl version
+LM-SFA-11015582:kubernetes lecai$ minikube start
+LM-SFA-11015582:kubernetes lecai$ minikube start -p go_app_cluster
+LM-SFA-11015582:kubernetes lecai$ kubectl get nodes
+NAME       STATUS   ROLES    AGE   VERSION
+minikube   Ready    master   82s   v1.16.2
+LM-SFA-11015582:kubernetes lecai$ minikube delete
+🔥  Deleting "minikube" in hyperkit ...
+💔  The "minikube" cluster has been deleted.
+🔥  Successfully deleted profile "minikube"
+LM-SFA-11015582:kubernetes lecai$ kubectl get nodes
+NAME       STATUS   ROLES    AGE    VERSION
+minikube   Ready    master   2m7s   v1.16.2
+LM-SFA-11015582:kubernetes lecai$ kubectl config use-context minikube
+Switched to context "minikube".
+LM-SFA-11015582:kubernetes lecai$ kubectl config use-context go_app_cluster
+Switched to context "go_app_cluster".
+LM-SFA-11015582:kubernetes lecai$ kubectl get pods
+No resources found in default namespace.
+LM-SFA-11015582:kubernetes lecai$ kubectl get nodes
+NAME       STATUS   ROLES    AGE     VERSION
+minikube   Ready    master   3m10s   v1.16.2
+LM-SFA-11015582:kubernetes lecai$ minikube dashboard
+💣  minikube cluster does not exist
+LM-SFA-11015582:kubernetes lecai$ minikube dashboard --help
+Access the kubernetes dashboard running within the minikube cluster
+
+Options:
+      --url=false: Display dashboard URL instead of opening a browser
+
+Usage:
+  minikube dashboard [flags] [options]
+
+Use "minikube dashboard options" for a list of global command-line options (applies to all commands).
+LM-SFA-11015582:kubernetes lecai$ minikube dashboard options
+💣  minikube cluster does not exist
+LM-SFA-11015582:kubernetes lecai$ minikube start
+😄  minikube v1.5.2 on Darwin 10.14.6
+✨  Automatically selected the 'hyperkit' driver (alternates: [virtualbox])
+🔥  Creating hyperkit VM (CPUs=2, Memory=2000MB, Disk=20000MB) ...
+🐳  Preparing Kubernetes v1.16.2 on Docker '18.09.9' ...
+🚜  Pulling images ...
+🚀  Launching Kubernetes ...
+⌛  Waiting for: apiserver
+🏄  Done! kubectl is now configured to use "minikube"
+LM-SFA-11015582:kubernetes lecai$ kubectl get nodes
+NAME       STATUS   ROLES    AGE    VERSION
+minikube   Ready    master   102s   v1.16.2
+LM-SFA-11015582:kubernetes lecai$ kubectl get pods
+No resources found in default namespace.
+LM-SFA-11015582:kubernetes lecai$ kubectl config use-context minikube
+Switched to context "minikube".
+LM-SFA-11015582:kubernetes lecai$ minikube dashboard
+🔌  Enabling dashboard ...
+🤔  Verifying dashboard health ...
+🚀  Launching proxy ...
+🤔  Verifying proxy health ...
+🎉  Opening http://127.0.0.1:50811/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
+^C
+LM-SFA-11015582:kubernetes lecai$ minikube delete --help
+Deletes a local kubernetes cluster. This command deletes the VM, and removes all
+associated files.
+
+Options:
+      --all=false: Set flag to delete all profiles
+      --purge=false: Set this flag to delete the '.minikube' folder from your user directory.
+
+Usage:
+  minikube delete [flags] [options]
+
+Use "minikube delete options" for a list of global command-line options (applies to all commands).
+LM-SFA-11015582:kubernetes lecai$ minikube delete -p go_app_cluster
+🔥  Deleting "go_app_cluster" in hyperkit ...
+💔  The "go_app_cluster" cluster has been deleted.
+🔥  Successfully deleted profile "go_app_cluster"
+LM-SFA-11015582:kubernetes lecai$ minikube start -p go_app_cluster
+😄  [go_app_cluster] minikube v1.5.2 on Darwin 10.14.6
+✨  Automatically selected the 'hyperkit' driver (alternates: [virtualbox])
+🔥  Creating hyperkit VM (CPUs=2, Memory=2000MB, Disk=20000MB) ...
+🐳  Preparing Kubernetes v1.16.2 on Docker '18.09.9' ...
+🚜  Pulling images ...
+🚀  Launching Kubernetes ...
+⌛  Waiting for: apiserver
+🏄  Done! kubectl is now configured to use "go_app_cluster"
+LM-SFA-11015582:kubernetes lecai$ kubectl config use-context go_app_cluster
+Switched to context "go_app_cluster".
+LM-SFA-11015582:kubernetes lecai$ minikube dashboard -p go_app_cluster
+🤔  Verifying dashboard health ...
+🚀  Launching proxy ...
+🤔  Verifying proxy health ...
+🎉  Opening http://127.0.0.1:51172/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
+^C

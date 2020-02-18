@@ -1,0 +1,23 @@
+# Deployment yaml for creating kubernetes deployment
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web01
+  labels:
+    app: web-example1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-example1
+  template:
+    metadata:
+      labels:
+        app: web-example1
+    spec:
+      containers:
+      - name: web-example1
+        image: andylei/web-example1
+        ports:
+        - containerPort: 8080

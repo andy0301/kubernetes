@@ -1,5 +1,8 @@
 # Using minikube + docker to deploy a GO web application 
 
+## web example1 diagram
+![diagram](./k8s-web-example1.jpg)
+
 ## Steps:
 * Install minikube: https://kubernetes.io/docs/tasks/tools/install-minikube/, commands ran in my MAC:
     * install virtualbox

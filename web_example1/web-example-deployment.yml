@@ -7,10 +7,16 @@ metadata:
   labels:
     app: web-example1
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: web-example1
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 2
   template:
     metadata:
       labels:
@@ -18,6 +24,11 @@ spec:
     spec:
       containers:
       - name: web-example1
-        image: andylei/web-example1
+        image: andylei/web-example1:v2
         ports:
         - containerPort: 8080
+        readinessProbe:
+          periodSeconds: 2
+          httpGet:
+            path: /
+            port: 8080
